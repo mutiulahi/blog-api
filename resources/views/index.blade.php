@@ -41,13 +41,9 @@
 <body>
 
     <div class="boxed_wrapper">
-
-        <!-- main header -->
         <?php include './layout/header.php' ?>
-        <!-- main-header end -->
 
         <section class="page-title" style="margin-top: -50px;">
-            <!-- <div class="pattern-layer" style="background-image: url(assets/images/shape/shape-87.png);"></div> -->
             <div class="auto-container">
                 <div class="sec-title style-two">
                     <h5>BLOG</h5>

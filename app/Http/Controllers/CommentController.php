@@ -11,13 +11,14 @@ class CommentController extends Controller
 {
     public function store($id, Request $request)
     {
+        $request->validate([
+            'subject' => 'required',
+            'body' => 'required',
+            'article_id' => 'required|exists:articles,id'
+        ]);
+
         try {
-            $request->validate([
-                'subject' => 'required',
-                'body' => 'required',
-                'article_id' => 'required|exists:articles,id'
-            ]);
-    
+            
             $comment = new Comment();
             $comment->subject = $request->input('subject');
             $comment->body = $request->input('body');
@@ -31,7 +32,7 @@ class CommentController extends Controller
             return APIResponse::success('Your message has been successfully sent.');
 
         } catch (Exception $exception) {
-            return APIResponse::error($exception->getMessage(), 500);
+            return APIResponse::error("Error occour {$exception}", 500);
         }
 
     }

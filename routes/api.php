@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\{ArticleController, CommentController};
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +25,9 @@ Route::controller(ArticleController::class)->group(function () {
 
     Route::get('articles/{id}/view', 'view')->name('view');
 
-    Route::post('articles/{id}/comments', 'store')->name('store_comment');
 
+});
+
+Route::controller(CommentController::class)->group(function () {
+    Route::post('articles/{id}/comments', 'store')->name('store_comment');
 });

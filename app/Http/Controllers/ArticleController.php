@@ -43,6 +43,7 @@ class ArticleController extends Controller
         }
     }
 
+
     public function view($id)
     {
         try {
