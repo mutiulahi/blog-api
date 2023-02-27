@@ -1,4 +1,4 @@
-# Sweet Ride Laravel Admin Backend
+# Blog Api Test
 
 ## Installation
 
