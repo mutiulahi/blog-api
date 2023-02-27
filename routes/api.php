@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,20 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(Article::class)->group(function () {
-    Route::get('articles', 'index')
-        ->name('index');            
+Route::controller(ArticleController::class)->group(function () {
+    Route::get('articles', 'index')->name('index');            
 
-    Route::get('articles/{id}', 'show')
-        ->name('show');
+    Route::get('articles/{id}', 'show')->name('show');
 
-    Route::post('articles/{id}/like', 'like')->
-        name('like');
+    Route::get('articles/{id}/like', 'like')->name('like');
 
-    Route::post('articles/{id}/view', 'view')->
-        name('view');
+    Route::get('articles/{id}/view', 'view')->name('view');
 
     Route::post('articles/{id}/comments', 'store')->name('store_comment');
-
 
 });

@@ -15,16 +15,12 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
-            $table->text('content');
+            $table->text('slug');
+            $table->text('body');
             $table->string('image');
-            $table->string('author');
-            $table->string('category');
-            $table->json('tags');
-            $table->string('status');
-            $table->string('views');
-            $table->string('likes');
-            $table->string('dislikes');
+            $table->unsignedBigInteger('views');
+            $table->unsignedBigInteger('likes');
+            $table->unsignedBigInteger('dislikes');
             $table->timestamps();
         });
     }

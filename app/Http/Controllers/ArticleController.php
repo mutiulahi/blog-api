@@ -3,33 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Article;
+use App\Models\{Article, Comment, Tag};
+use Exception;
 
 class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::orderByDesc('created_at')->paginate(10);
-        return response()->json($articles);
+        try {
+            $articles = Article::orderByDesc('created_at')
+                ->with(['comments'])
+                ->paginate(10);
+            return APIResponse::success('Articles', $articles);
+        } catch (Exception $exception) {
+            return APIResponse::error($exception->getMessage(), 500);
+        }
     }
 
     public function show($id)
     {
-        $article = Article::findOrFail($id);
-        return response()->json($article);
+        try {
+            $article = Article::where('id', $id)
+                ->with(['comments'])
+                ->get();
+            return APIResponse::success('Article', $article);
+        } catch (Exception $exception) {
+            return APIResponse::error($exception->getMessage(), 500);
+        }
     }
 
     public function like($id)
     {
-        $article = Article::findOrFail($id);
-        $article->increment('likes');
-        return response()->json(['likes' => $article->likes]);
+        try {
+            $article = Article::findOrFail($id);
+            $article->increment('likes');
+            return APIResponse::success('Likes', $article->likes);
+        } catch (Exception $exception) {
+            return APIResponse::error($exception->getMessage(), 500);
+        }
     }
 
     public function view($id)
     {
-        $article = Article::findOrFail($id);
-        $article->increment('views');
-        return response()->json(['views' => $article->views]);
+        try {
+            $article = Article::findOrFail($id);
+            $article->increment('views');
+            return APIResponse::success('Views', $article->views);
+        } catch (Exception $exception) {
+            return APIResponse::error($exception->getMessage(), 500);
+        }
     }
 }
