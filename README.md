@@ -7,7 +7,10 @@
 ```bash
 composer install
 ```
-
+### run npm install 
+```bash
+npm install
+```
 ### Duplicate environments
 
 ```bash

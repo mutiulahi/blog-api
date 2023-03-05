@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
+
+Route::get('/', [ArticleController::class, 'index_view'])->name('index_view');
+Route::get('/article/{id}', [ArticleController::class, 'show_view'])->name('show_view');
+Route::get('/article/{id}/like', [ArticleController::class, 'like_views'])->name('like');
+Route::get('/article/{id}/view', [ArticleController::class, 'view_views'])->name('view');
+
+Route::get('/article/{id}/dislike', [ArticleController::class, 'dislike_views'])->name('dislike');
+Route::get('/article/{id}/comment', [ArticleController::class, 'comment_views'])->name('comment');
+

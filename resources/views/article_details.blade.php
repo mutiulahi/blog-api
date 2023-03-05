@@ -1,19 +1,3 @@
-<?php
-include 'database/connection.php';
- if(!$_GET['id']){
-     header('Location: news.php');
- }else{
-
-        $id = $_GET['id'];
-        $sql = "SELECT * FROM news WHERE id = '$id'";
-        $result = mysqli_query($dbconnect, $sql);
-        $row = mysqli_fetch_assoc($result);
-        $title = $row['title'];
-        $created_at = $row['created_at'];
-        $body = $row['body'];
-        $image = $row['image'];
- }
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,13 +41,7 @@ include 'database/connection.php';
 <body>
 
     <div class="boxed_wrapper">
-
-        <!-- main header -->
-        <?php include './layout/header.php' ?>
-        <!-- main-header end -->
-
         <section class="page-title" style="margin-top: -50px;">
-            <!-- <div class="pattern-layer" style="background-image: url(assets/images/shape/shape-87.png);"></div> -->
             <div class="auto-container">
                 <div class="sec-title style-two">
                     <h5>NEWS</h5>
@@ -75,42 +53,23 @@ include 'database/connection.php';
         <section class="sidebar-page-container">
             <div class="auto-container">
                 <div class="row clearfix">
+                    
                     <div class="col-lg-8 col-md-12 col-sm-12 content-side">
                         <div class="blog-details-content">
                             <div class="inner-box">
                                 <figure class="image-box">
-                                    <img src="assets/images/news/<?php echo $image;?>" alt="">
+                                    <img src="{{$article_data['image']}}" alt="">
                                 </figure>
                                 <div class="lower-content">
-                                    <span class="post-date"><?php echo date("M, d Y", strtotime($created_at)); ?></span>
+                                    <span class="post-date">{{ date("M, d Y", strtotime($article_data['created_at'])) }}</span>
                                     <ul class="post-info clearfix">
-                                        <!-- <li><i class="far fa-user"></i><a href="blog-details.html">Admin</a></li> -->
+                                        <li> <a href="{{route('view',$article_data['id'])}}"> <span>views: </span>{{$article_data['views']}}</a></li>
+                                        <li> <a href="{{route('like',$article_data['id'])}}"> <span>likes: </span>{{$article_data['likes']}}</a></li>
                                     </ul>
-                                    <h2><?php echo $title;?></h2>
+                                    <h2>{{$article_data['title']}}</h2>
                                     <div class="text">
-                                    <?php echo $body;?>
+                                        {{$article_data['body']}}
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
-                        <div class="blog-sidebar">
-                            <div class="sidebar-widget post-widget">
-                                <div class="widget-title">
-                                    <h3>Tranding Post</h3>
-                                </div>
-                                <div class="post-inner">
-                                    <?php
-                                    include 'database/connection.php';
-                                    $sql = "SELECT * FROM news";
-                                    $result = mysqli_query($dbconnect, $sql);
-                                    while ($row_news = mysqli_fetch_array($result)) {
-                                    ?>
-                                        <div class="post" style="padding-left: 10px;">
-                                            <h4><a href="new_detail.php?id=<?php echo $row_news['id']; ?>"><?php echo $row_news['title']; ?></a></h4>
-                                        </div>
-                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -119,10 +78,6 @@ include 'database/connection.php';
             </div>
         </section>
         <!-- blog-grid end -->
-
-        <!-- main-footer -->
-        <?php @include "./layout/footer.php" ?>
-        <!-- main-footer end -->
     </div>
 
 
