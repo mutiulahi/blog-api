@@ -64,32 +64,41 @@
                                 data-wow-duration="1500ms">
                                 <div class="inner-box">
                                     <figure class="image-box">
-                                        <img src="{{$article['image']}}" alt="" style="height: 500px;">
-                                        <a href="new_detail.php?id={{$article['id']}}"><i class="fas fa-link"></i></a>
+                                        <img src="{{ $article['image'] }}" alt="" style="height: 500px;">
+                                        <a href="new_detail.php?id={{ $article['id'] }}"><i class="fas fa-link"></i></a>
                                     </figure>
                                     <div class="lower-content">
                                         <div class="inner">
-                                            <span class="post-date">{{date('M, d Y', strtotime($article['created_at']))}} </span>
+                                            <span
+                                                class="post-date">{{ date('M, d Y', strtotime($article['created_at'])) }}
+                                            </span>
                                             <ul class="post-info clearfix">
-                                                <li> <a href="{{route('view',$article['id'])}}"> <span>views: </span>{{$article['views']}}</a></li>
-                                                <li> <a href="{{route('like',$article['id'])}}"> <span>likes: </span>{{$article['likes']}}</a></li>
+                                                <li> <a href="{{ route('view', $article['id']) }}"> <span>views:
+                                                        </span>{{ $article['views'] }}</a></li>
+                                                <li> <a href="{{ route('like', $article['id']) }}"> <span>likes:
+                                                        </span>{{ $article['likes'] }}</a></li>
                                             </ul>
-                                            <h3><a href="{{route('show_view',$article['id'])}}">{{$article['title']}}</a></h3>
-                                            <div class="btn-box"><a href="{{route('show_view',$article['id'])}}">Read More +</a></div>
+                                            <h3><a
+                                                    href="{{ route('show_view', $article['id']) }}">{{ $article['title'] }}</a>
+                                            </h3>
+                                            <div class="btn-box"><a href="{{ route('show_view', $article['id']) }}">Read
+                                                    More +</a></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
-                    
+
                     <div class="pagination-wrapper centred">
+
                         <ul class="pagination clearfix">
-                            <li><a href="blog.html"><i class="fas fa-angle-left"></i></a></li>
-                            <li><a href="blog.html">1</a></li>
-                            <li><a href="blog.html" class="current">2</a></li>
-                            <li><a href="blog.html">3</a></li>
-                            <li><a href="blog.html"><i class="fas fa-angle-right"></i></a></li>
+                            {{-- {{print_r($articles_link)}}
+                           {{$articles_link[0]['url']}} --}}
+                            @foreach ($articles_link as $link)
+                                <li><a href="{{ $link['url'] }}" @if ($link['active'] == true) class="current" @endif>{{ $link['label'] }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
 

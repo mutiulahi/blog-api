@@ -72,7 +72,6 @@ class ArticleController extends Controller
         $article = $this->show($id);
         $article = json_decode($article->getContent(), true);
         $article_data = $article['data'][0];
-        // dd($article_data);
         $article_comments = $article_data['comments'];
         return view('article_details', compact('article_data', 'article_comments'));
     }
