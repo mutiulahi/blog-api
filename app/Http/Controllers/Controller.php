@@ -11,13 +11,22 @@ use Illuminate\Routing\Controller as BaseController;
  *      version="1.0.0",
  *      title="Article API",
  *      description="This Documentation is for the Article API endpoints",
- *      @OA\Contact(
- *          email="tesleemolamilekan902@gmail.com"
+ *     @OA\Contact(
+ *          email="tesleemolamilekan902@gmail.com",
+ *          name="Tesleem Olamilekan MUTIULAHI",
+ * 
+ *     ),
  *      ),
  *     @OA\License(
  *         name="Apache 2.0",
  *         url="https://www.apache.org/licenses/LICENSE-2.0.html"
  *     )
+ * )
+ */
+/**
+ * @OA\Server(
+ *    description="Article API",
+ *   url="http://localhost:8000"
  * )
  */
 class Controller extends BaseController
