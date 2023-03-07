@@ -8,6 +8,37 @@ use Exception;
 
 class ArticleController extends Controller
 {
+    // Swagger Documentation 
+    /**
+     * @OA\Get(
+     *      path="/api/articles",
+     *      operationId="getArticlesList",
+     *      tags={"Articles"},
+     *      summary="Get list of articles",
+     *      description="Returns list of articles",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", example=true),
+     *              @OA\Property(property="message", type="string", example="Articles"),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Article")
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal Server Error",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", example=false),
+     *              @OA\Property(property="message", type="string", example="Internal Server Error"),
+     *          ),
+     *      ),
+     * )
+     */
     public function index()
     {
         try {
@@ -20,6 +51,40 @@ class ArticleController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/articles",
+     *      operationId="storeArticle",
+     *      tags={"Articles"},
+     *      summary="Store new article",
+     *      description="Returns article data",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Article")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", example=true),
+     *              @OA\Property(property="message", type="string", example="Article created successfully"),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Article")
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal Server Error",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", example=false),
+     *              @OA\Property(property="message", type="string", example="Internal Server Error"),
+     *          ),
+     *      ),
+     * )
+     */
     public function show($id)
     {
         try {
@@ -32,6 +97,40 @@ class ArticleController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/articles",
+     *      operationId="storeArticle",
+     *      tags={"Articles"},
+     *      summary="Store new article",
+     *      description="Returns article data",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Article")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", example=true),
+     *              @OA\Property(property="message", type="string", example="Article created successfully"),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Article")
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal Server Error",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", example=false),
+     *              @OA\Property(property="message", type="string", example="Internal Server Error"),
+     *          ),
+     *      ),
+     * )
+     */
     public function like($id)
     {
         try {
@@ -44,6 +143,40 @@ class ArticleController extends Controller
     }
 
 
+    /**
+     * @OA\Post(
+     *      path="/api/articles",
+     *      operationId="storeArticle",
+     *      tags={"Articles"},
+     *      summary="Store new article",
+     *      description="Returns article data",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Article")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", example=true),
+     *              @OA\Property(property="message", type="string", example="Article created successfully"),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Article")
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal Server Error",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", example=false),
+     *              @OA\Property(property="message", type="string", example="Internal Server Error"),
+     *          ),
+     *      ),
+     * )
+     */
     public function view($id)
     {
         try {
@@ -55,8 +188,7 @@ class ArticleController extends Controller
         }
     }
 
-
-
+    
     public function index_view()
     {
         $articles = $this->index();
