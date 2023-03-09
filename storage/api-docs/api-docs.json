@@ -2,13 +2,10 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Article API",
-        "description": "This Documentation is for the Article API endpoints",
+        "description": "Article API",
         "contact": {
+            "name": "Tesleem Olamilekan MUTIULAHI",
             "email": "tesleemolamilekan902@gmail.com"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
         },
         "version": "1.0.0"
     },
@@ -23,27 +20,107 @@
                 "tags": [
                     "Article"
                 ],
-                "summary": "Finds Pets by status",
-                "description": "Multiple status values can be provided with comma separated string",
+                "summary": "Get list of Articles",
+                "description": "Returns list of Articles",
                 "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/api/articles/{id}": {
+            "get": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Find a Article by ID",
+                "description": "Returns a single Article",
+                "operationId": "show",
                 "parameters": [
                     {
-                        "name": "status",
-                        "in": "query",
-                        "description": "Status values that needed to be considered for filter",
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Article to return",
                         "required": true,
-                        "explode": true,
                         "schema": {
-                            "type": "string",
-                            "default": "available",
-                            "enum": [
-                                "available",
-                                "pending",
-                                "sold"
-                            ]
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/api/articles/{id}/like": {
+            "post": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Increase article likes count and return new count",
+                "description": "Article ID to like and return new likes count",
+                "operationId": "like",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Article to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Provide article ID to like",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/api/articles/{id}/view": {
+            "post": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Increase article views count and return new count",
+                "description": "Article ID to view and return new views count",
+                "operationId": "view",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Article to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Provide article ID to view",
+                    "required": true
+                },
                 "responses": {
                     "200": {
                         "description": "successful operation"

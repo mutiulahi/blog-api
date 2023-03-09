@@ -11,32 +11,19 @@ class ArticleController extends Controller
     // Swagger Documentation 
     /**
      * @OA\Get(
-     *      path="/api/articles",
-     *      operationId="getArticlesList",
-     *      tags={"Articles"},
-     *      summary="Get list of articles",
-     *      description="Returns list of articles",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="success", type="boolean", example=true),
-     *              @OA\Property(property="message", type="string", example="Articles"),
-     *              @OA\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @OA\Items(ref="#/components/schemas/Article")
-     *              ),
-     *          ),
-     *      ),
-     *      @OA\Response(
-     *          response=500,
-     *          description="Internal Server Error",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="success", type="boolean", example=false),
-     *              @OA\Property(property="message", type="string", example="Internal Server Error"),
-     *          ),
-     *      ),
+     *     path="/api/articles",
+     *     tags={"Article"},
+     *     summary="Get list of Articles",
+     *     description="Returns list of Articles",
+     *     operationId="index",
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     ), 
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     ),
      * )
      */
     public function index()
@@ -52,39 +39,33 @@ class ArticleController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *      path="/api/articles",
-     *      operationId="storeArticle",
-     *      tags={"Articles"},
-     *      summary="Store new article",
-     *      description="Returns article data",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/Article")
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="success", type="boolean", example=true),
-     *              @OA\Property(property="message", type="string", example="Article created successfully"),
-     *              @OA\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @OA\Items(ref="#/components/schemas/Article")
-     *              ),
-     *          ),
-     *      ),
-     *      @OA\Response(
-     *          response=500,
-     *          description="Internal Server Error",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="success", type="boolean", example=false),
-     *              @OA\Property(property="message", type="string", example="Internal Server Error"),
-     *          ),
-     *      ),
+     * @OA\Get(
+     *     path="/api/articles/{id}",
+     *     tags={"Article"},
+     *     summary="Find a Article by ID",
+     *     description="Returns a single Article",
+     *     operationId="show",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of Article to return",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     ), 
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     ),
      * )
      */
+
     public function show($id)
     {
         try {
@@ -99,38 +80,36 @@ class ArticleController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/api/articles",
-     *      operationId="storeArticle",
-     *      tags={"Articles"},
-     *      summary="Store new article",
-     *      description="Returns article data",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/Article")
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="success", type="boolean", example=true),
-     *              @OA\Property(property="message", type="string", example="Article created successfully"),
-     *              @OA\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @OA\Items(ref="#/components/schemas/Article")
-     *              ),
-     *          ),
-     *      ),
-     *      @OA\Response(
-     *          response=500,
-     *          description="Internal Server Error",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="success", type="boolean", example=false),
-     *              @OA\Property(property="message", type="string", example="Internal Server Error"),
-     *          ),
-     *      ),
+     *     path="/api/articles/{id}/like",
+     *     tags={"Article"},
+     *     summary="Increase article likes count and return new count",
+     *     description="Article ID to like and return new likes count",
+     *     operationId="like",
+     *     @OA\RequestBody(
+     *         description="Provide article ID to like",
+     *         required=true,
+     *     ),
+     *  @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of Article to return",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     ), 
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     ),
      * )
      */
+
     public function like($id)
     {
         try {
@@ -145,38 +124,36 @@ class ArticleController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/api/articles",
-     *      operationId="storeArticle",
-     *      tags={"Articles"},
-     *      summary="Store new article",
-     *      description="Returns article data",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/Article")
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="success", type="boolean", example=true),
-     *              @OA\Property(property="message", type="string", example="Article created successfully"),
-     *              @OA\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @OA\Items(ref="#/components/schemas/Article")
-     *              ),
-     *          ),
-     *      ),
-     *      @OA\Response(
-     *          response=500,
-     *          description="Internal Server Error",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="success", type="boolean", example=false),
-     *              @OA\Property(property="message", type="string", example="Internal Server Error"),
-     *          ),
-     *      ),
+     *     path="/api/articles/{id}/view",
+     *     tags={"Article"},
+     *     summary="Increase article views count and return new count",
+     *     description="Article ID to view and return new views count",
+     *     operationId="view",
+     *     @OA\RequestBody(
+     *         description="Provide article ID to view",
+     *         required=true,
+     *     ),
+     *  @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of Article to return",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     ), 
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     ),
      * )
      */
+
     public function view($id)
     {
         try {
@@ -188,7 +165,7 @@ class ArticleController extends Controller
         }
     }
 
-    
+
     public function index_view()
     {
         $articles = $this->index();
@@ -196,7 +173,6 @@ class ArticleController extends Controller
         $articles_data = $articles['data']['data'];
         $articles_link = $articles['data']['links'];
         return view('index', compact('articles_data', 'articles_link'));
-
     }
 
     public function show_view($id)
